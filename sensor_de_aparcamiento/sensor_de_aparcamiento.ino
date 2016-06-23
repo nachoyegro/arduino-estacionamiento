@@ -1,8 +1,8 @@
 #include <Wire.h>
-//#include <LCD.h> 
-//#include <LiquidCrystal_I2C.h>
+#include <LCD.h> 
+#include <LiquidCrystal_I2C.h>
 
-//LiquidCrystal_I2C lcd( 0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE );
+LiquidCrystal_I2C lcd(0x3F, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 //Variables varias
 int led1 = 12;
 int led2 = 11;
@@ -22,10 +22,9 @@ int pinecho = 2; // echo es el que recibe el pulso
 int pintrig = 3; // trig es el que emite el pulso
 
 void setup() {
-  //lcd.begin(16,2);
-  //lcd.setCursor(0,0);
-  //lcd.print("SENS PROXIMIDAD");
-  Serial.begin(9600);
+  lcd.begin(16,2);
+  lcd.setCursor(0,0);
+  lcd.print("SENS PROXIMIDAD");
   pinMode(led1, OUTPUT);
   pinMode(led2, OUTPUT);
   pinMode(led3, OUTPUT);
@@ -53,20 +52,13 @@ void loop() {
                                    //tiempo que el pin echo ha estado recibiendo
                                    //un pulso "HIGH"
   distancia = ((tiempo/2) / 29);
-  if (distancia == 30) {
-    Serial.println("Gano");
-  } else {
-    Serial.println("Perdio");
-  }
-  Serial.println(distancia);
   /* El pin echo almacena el tiempo que tarda la onda del pulso de ida y vuelta,
   por ello la dividimos entre 2. Luego la dividimos entre 29 para cambiar de 
   unidad la velocidad del sonido */
-
   /*
   if(digitalRead(interruptor) == HIGH) { 
-    lcd.noDisplay();
-    lcd.off();
+    //lcd.noDisplay();
+    //lcd.off();
     digitalWrite(led1, LOW); 
     digitalWrite(led2, LOW);
     digitalWrite(led3, LOW);
@@ -79,22 +71,15 @@ void loop() {
     analogWrite(buzzer, 0);
   }
   else {
+  */
   lcd.on();
+  lcd.clear();
   lcd.setCursor(0,1);
   lcd.print("Distancia:");
-  if(distancia > 300) {
-    lcd.print("---"); }
-  else {
-  if(distancia < 100 && distancia > 0) {
-    lcd.print("0"); }
-  if(distancia < 10 && distancia > 0) {
-    lcd.print("0"); } 
-  if(distancia > 0) {
   lcd.print(distancia);
-  lcd.print(" cm"); }
-  }
-  
-  */
+  lcd.print("cm");
+  delay(400);
+  /*
   if(distancia < 101 && distancia > 90) {
     digitalWrite(led1, HIGH);
     digitalWrite(led2, LOW);
@@ -236,9 +221,10 @@ void loop() {
     digitalWrite(led8, LOW);
     digitalWrite(led9, LOW); 
     analogWrite(buzzer, 0); }
-    
-    delay(400);
-  }
+    */
+    //Serial.println(distancia);
+
+}
   
   
   
