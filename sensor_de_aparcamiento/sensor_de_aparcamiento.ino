@@ -11,8 +11,8 @@ int led4 = 9;
 int led5 = 8;
 int led6 = 7;
 int led7 = 6;
-int led8 = 5;
-int led9 = 4;
+int led8 = 4;
+int led9 = 5;
 int buzzer = A0;
 int interruptor = 13;
 //Variables sensor de ultrasonidos
@@ -22,6 +22,7 @@ int pinecho = 2; // echo es el que recibe el pulso
 int pintrig = 3; // trig es el que emite el pulso
 
 void setup() {
+  Serial.begin(9600);
   lcd.begin(16,2);
   lcd.setCursor(0,0);
   lcd.print("SENS PROXIMIDAD");
